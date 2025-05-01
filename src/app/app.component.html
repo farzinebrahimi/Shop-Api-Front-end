@@ -1,37 +1,52 @@
-<div class="containers">
-  <div class="flex flex-col w-full gap-y-32">
-<!--    Normal Array-->
-    <div class="frame ">
+<div class="containers flex flex-col justify-start items-start w-full gap-y-32 bg-stone-700">
+  <!--    Normal Array Header-->
+  <div class="flex justify-center w-full fixed top-10">
+    <div class="bg-stone-400/20 rounded-2xl  flex justify-between px-32 py-5 backdrop-blur-2xl ">
       <li *ngFor="let item of headerItems">
-        <ul [routerLink]="item.urlLink">{{item.title}}</ul>
+        <ul [routerLink]="item.urlLink">{{ item.title }}</ul>
       </li>
     </div>
-<!--    Shared Button UseCase-->
-    <div class="w-full flex w-full justify-center gap-x-5">
-      <app-shared-button
-        title="CANCEL"
-        bgColor="bg-red-700"
-        borderColor="border-red-400"
-        hoverBgColor="hover:bg-red-400"
-        (buttonClicked)="cancelFunc()"
+  </div>
+  <!--    Shared Button UseCase-->
+  <div class="w-full flex w-full justify-center gap-x-5">
+    <app-shared-button
+      title="CANCEL"
+      bgColor="bg-red-700"
+      borderColor="border-red-400"
+      hoverBgColor="hover:bg-red-400"
+      (buttonClicked)="cancelFunc()"
 
-      >
-      </app-shared-button>
-      <app-shared-button
-        title="START"
-        bgColor="bg-green-700"
-        borderColor="border-green-400"
-        hoverBgColor="hover:bg-green-400"
-        (buttonClicked)="startFunc()"
-      >
-      </app-shared-button>
-    </div>
+    >
+    </app-shared-button>
+    <app-shared-button
+      title="START"
+      bgColor="bg-green-700"
+      borderColor="border-green-400"
+      hoverBgColor="hover:bg-green-400"
+      (buttonClicked)="startFunc()"
+    >
+    </app-shared-button>
   </div>
-<!--  Nested Array-->
+
+  <!--  Nested Array-->
   <div *ngFor="let product of products">
-    {{product.images.image2}}
+    {{ product.images.image2 }}
   </div>
-  <div *ngFor="let prod of productList">
-    {{prod.title}}
+<!--  Load Data With Product Model-->
+  <div class="flex justify-center items-center container w-full flex-wrap gap-4  ">
+    <div *ngFor="let prod of productList" >
+      <div class=" ">
+        <div class="bg-stone-300 max-w-[400px] max-h-[500px] rounded-xl">
+          <div class="w-full h-[200px] flex justify-center">
+            <img src="{{prod.image}}" class="w-full h-full rounded-xl object-cover" alt="">
+          </div>
+            <div class="flex flex-col justify-start items-start p-4">
+              <h1 class="text-xl">{{ prod.title }}</h1>
+              <p class="text-stone-900/80 text-base">{{ prod.description }}</p>
+              <p>Price: ${{ prod.price }}</p>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

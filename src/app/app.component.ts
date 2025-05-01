@@ -13,6 +13,9 @@ import {ProductService} from './services/product.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  /*------- Load Model -------*/
+  productList: ProductList[] = [];
+
   /*------- Array -------*/
   headerItems = [
     {title: 'HOME', urlLink:'/home', icon: '*'},
@@ -41,8 +44,7 @@ export class AppComponent {
   cancelFunc(){
     alert("App Cancelled!");
   }
-  /*------- Load Model -------*/
-  productList: ProductList[] = [];
+
 
 
 
