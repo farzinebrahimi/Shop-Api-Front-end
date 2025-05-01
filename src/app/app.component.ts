@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NgFor} from '@angular/common';
 import {RouterLink} from '@angular/router';
-import {SharedButtonComponent} from './modules/shared/shared-button/shared-button.component';
+import {SharedButtonComponent} from './shared/shared-button/shared-button.component';
 
 @Component({
   selector: 'app-root',
@@ -29,5 +29,8 @@ export class AppComponent {
   cancelFunc(){
     alert("App Cancelled!");
   }
+  /*------- Load Model -------*/
+
+
 
 }
