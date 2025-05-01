@@ -1,4 +1,4 @@
-class product{
+export class ProductList{
   title: string;
   description: string;
   image:string;
