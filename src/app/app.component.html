@@ -7,6 +7,16 @@
       </li>
     </div>
   </div>
+  <div class="w-full flex justify-center bg-amber-200 shadow-md rounded-3xl"
+    *ngFor="let user of users"
+  >
+    <p>{{user.userName}}</p>
+
+  </div>
+  <div class="w-full flex justify-center bg-amber-200 shadow-md rounded-3xl">
+    <p>{{user.userName}}</p>
+
+  </div>
   <!--    Shared Button UseCase-->
   <div class="w-full flex w-full justify-center gap-x-5">
     <app-shared-button

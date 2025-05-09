@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgFor} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {SharedButtonComponent} from './shared/shared-button/shared-button.component';
 import {ProductList} from './_models/product/product.model';
 import {ProductService} from './_services/product.service';
+import {UserModelForList} from './_models/user/user.model';
+import {UserService} from './_services/users/user.service';
 
 
 @Component({
@@ -12,41 +14,7 @@ import {ProductService} from './_services/product.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  /*------- Load Model -------*/
-  productList: ProductList[] = [];
-
-  /*------- Array -------*/
-  headerItems = [
-    {title: 'HOME', urlLink:'/home', icon: '*'},
-    {title: 'GALLERY', urlLink:'/gallery', icon: '*'},
-    {title: 'ABOUT US', urlLink:'/about', icon: '*'},
-    {title: 'CONTACT US', urlLink:'/contact', icon: '*'}
-  ]
-  /*------- Nested Array -------*/
-  products = [
-    {title: 'product1', images:{image1:'image1', image2:'image2'},}
-  ]
-  /*------- Constructor -------*/
-  constructor(private  productService: ProductService){
-
-  }
-
-
-  /*------- Functions -------*/
-  startFunc(){
-    alert("App Started!");
-    this.productService.getAllProducts().subscribe(data =>{
-      this.productList = data;
-    })
-    console.log(JSON.stringify(this.productList));
-  }
-  cancelFunc(){
-    alert("App Cancelled!");
-  }
-
-
-
+export class AppComponent  {
 
 
 }
