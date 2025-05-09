@@ -3,7 +3,7 @@ import {NgFor} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {SharedButtonComponent} from './shared/shared-button/shared-button.component';
 import {ProductList} from './_models/product/product.model';
-import {ProductService} from './services/product.service';
+import {ProductService} from './_services/product.service';
 
 
 @Component({
