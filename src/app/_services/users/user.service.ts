@@ -9,5 +9,7 @@ import {UserModelForList} from '../../_models/user/user.model';
 export class UserService {
   apiUrl: string ="http://localhost:5084/api/users"
   constructor(private http : HttpClient) { }
-
+  getAllUsers(): Observable<UserModelForList[]>{
+    return this.http.get<UserModelForList[]>(this.apiUrl);
+  }
 }
