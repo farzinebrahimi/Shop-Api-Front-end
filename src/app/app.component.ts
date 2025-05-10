@@ -1,18 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {NgFor, NgForOf} from '@angular/common';
-import {RouterLink} from '@angular/router';
-import {SharedButtonComponent} from './shared/shared-button/shared-button.component';
-import {ProductList} from './_models/product/product.model';
-import {ProductService} from './_services/product.service';
+import {Component, OnInit} from '@angular/core';
 import {UserModelForList} from './_models/user/user.model';
 import {UserService} from './_services/users/user.service';
-import {HttpClient} from '@angular/common/http';
+import {RouterOutlet} from '@angular/router';
 
 
 @Component({
   selector: 'app-root',
   imports: [
-    NgForOf
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

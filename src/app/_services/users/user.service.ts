@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {UserModelForList} from '../../_models/user/user.model';
+import {UserModelForCreate, UserModelForList} from '../../_models/user/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +11,9 @@ export class UserService {
   constructor(private http : HttpClient) { }
   getAllUsers(): Observable<UserModelForList[]>{
     return this.http.get<UserModelForList[]>(this.apiUrl);
+  }
+
+  registerUser(user: UserModelForCreate): Observable<UserModelForCreate>{
+    return this.http.post<UserModelForCreate>(`${this.apiUrl}/register`, user);
   }
 }

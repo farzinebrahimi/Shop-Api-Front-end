@@ -2,8 +2,25 @@
 
 @import "tailwindcss";
 
+@layer base {
+  :root {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    height: 100%;
+  }
+}
 
-:root{
-  background-color: #212121;
+*, *:before, * :after {
+  box-sizing: inherit;
+
+}
+
+html, body {
+  font-family: "Yekan", serif;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100%;
 
 }
