@@ -1,7 +1,7 @@
 import {Component, input, output} from '@angular/core';
-import {UserModelForCreate, UserModelForList} from '../../../../_models/user/user.model';
 import {UserService} from '../../../../_services/users/user.service';
 import {FormsModule} from '@angular/forms';
+
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ import {FormsModule} from '@angular/forms';
 })
 export class RegisterComponent {
   cancelRegister = output<boolean>();
-  userRegister: UserModelForCreate = new UserModelForCreate();
+  userRegister: any;
 
   constructor(private userService: UserService) {}
 

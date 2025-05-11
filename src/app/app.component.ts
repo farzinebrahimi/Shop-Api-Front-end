@@ -1,6 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {UserModelForList} from './_models/user/user.model';
-import {UserService} from './_services/users/user.service';
+import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 
 
@@ -12,20 +10,6 @@ import {RouterOutlet} from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  users: UserModelForList[] = [];
-
-  constructor(private userService: UserService) {
-  }
-
-  ngOnInit() {
-
-  }
-
-
-  trackById(index: number, item: any): number {
-    return item.id;
-  }
-
+export class AppComponent  {
 
 }

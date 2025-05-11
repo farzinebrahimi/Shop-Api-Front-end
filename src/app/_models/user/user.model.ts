@@ -1,5 +1,5 @@
 
-export class UserModelForCreate{
+export class UserModelForRegister {
   phoneNumber: string;
   password: string;
 
@@ -7,9 +7,21 @@ export class UserModelForCreate{
   (
     phoneNumber: string = '',
     password: string = '',
+    token: string = ''
   ) {
     this.phoneNumber = phoneNumber;
+    this.password = password;
+  }
+}
 
+export class UserModelForLogin {
+  phoneNumber: string;
+  password: string;
+  constructor(
+    phoneNumber: string = '',
+    password: string = '',
+  ) {
+    this.phoneNumber = phoneNumber;
     this.password = password;
   }
 }
@@ -34,4 +46,5 @@ export class UserModelForList{
     this.password = password;
     this.email = email;
   }
+
 }

@@ -1,6 +1,6 @@
 import { CanActivateFn } from '@angular/router';
 import {inject} from '@angular/core';
-import {UserService} from '../_services/users/user.service';
+import {UserService} from '../../_services/users/user.service';
 import {ToastrService} from 'ngx-toastr';
 
 export const authGuard: CanActivateFn = (route, state) => {

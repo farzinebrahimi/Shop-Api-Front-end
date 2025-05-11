@@ -1,7 +1,7 @@
 import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, map, Observable} from 'rxjs';
-import {UserModelForCreate, UserModelForList} from '../../_models/user/user.model';
+import {UserModelForRegister, UserModelForList, UserModelForLogin} from '../../_models/user/user.model';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 
@@ -19,7 +19,7 @@ export class UserService {
 
   public usersList$: Observable<UserModelForList[]> = this.usersListSubject.asObservable();
 
-  currentUser = signal<UserModelForCreate | null>(null);
+  currentUser = signal<UserModelForLogin | null>(null);
 
 
   constructor(
@@ -38,8 +38,8 @@ export class UserService {
     })
   }
 
-  registerUser(newUser: UserModelForCreate) {
-    this.http.post<UserModelForCreate>(`${this.apiUrl}account/register`, newUser).subscribe(
+  registerUser(newUser: UserModelForRegister) {
+    this.http.post<UserModelForRegister>(`${this.apiUrl}account/register`, newUser).subscribe(
       (response) => {
         this.registerStatusSubject.next('Registration successful');
         this.router.navigateByUrl('members');
@@ -52,17 +52,18 @@ export class UserService {
     );
   }
 
-  loginUser(user: UserModelForCreate) {
-    this.http.post<UserModelForCreate>(`${this.apiUrl}account/login`, user).pipe(
-      map(user => {
-        if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-        this.currentUser.set(user);
-        this.router.navigateByUrl('members');
-        this.toastr.success('Login successful');
-        }
-      })
-    )
+  loginUser(user: UserModelForLogin) {
+    this.http.post<UserModelForLogin>(`${this.apiUrl}account/login`, user).pipe(
+        map((user) => {
+          if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            this.currentUser.set(user);
+            this.router.navigateByUrl('members');
+            this.toastr.success('Login successful');
+          }
+        })
+      )
+      .subscribe();
   }
 
   logoutUser(){

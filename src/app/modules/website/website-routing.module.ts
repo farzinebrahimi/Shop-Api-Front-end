@@ -6,17 +6,25 @@ import {MemberListComponent} from './_components/members/member-list/member-list
 import {MemberDetailComponent} from './_components/members/member-detail/member-detail.component';
 import {ListsComponent} from './_components/lists/lists.component';
 import {MessagesComponent} from './_components/messages/messages.component';
+import {authGuard} from '../../core/_guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '', component: WebsiteComponent, children: [
       {path: '', component: HomePageComponent},
-      {path: 'home', component: HomePageComponent},
-      {path: 'members', component: MemberListComponent},
-      {path: 'memebers/:id', component: MemberDetailComponent},
-      {path: 'lists', component: ListsComponent},
-      {path: 'messages', component: MessagesComponent},
-      {path: '**', component: HomePageComponent, pathMatch: 'full'},
+      {
+        path: '',
+        runGuardsAndResolvers: 'always',
+        canActivate: [authGuard],
+        children: [
+          {path: 'home', component: HomePageComponent},
+          {path: 'members', component: MemberListComponent},
+          {path: 'memebers/:id', component: MemberDetailComponent},
+          {path: 'lists', component: ListsComponent},
+          {path: 'messages', component: MessagesComponent},
+          {path: '**', component: HomePageComponent, pathMatch: 'full'},
+        ]
+      }
     ]
   }
 ];
@@ -26,6 +34,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class WebsiteRoutingModule {}
+export class WebsiteRoutingModule {
+}
 
 

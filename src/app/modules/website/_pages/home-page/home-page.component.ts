@@ -4,6 +4,7 @@ import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {RegisterComponent} from '../../_components/register/register.component';
 import {UserService} from '../../../../_services/users/user.service';
 import {UserModelForList} from '../../../../_models/user/user.model';
+import {TestErrorsComponent} from '../../../../shared/error/test-errors/test-errors.component';
 
 @Component({
   selector: 'app-home-page',
@@ -11,6 +12,7 @@ import {UserModelForList} from '../../../../_models/user/user.model';
     FormsModule,
     RegisterComponent,
     NgIf,
+    TestErrorsComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
