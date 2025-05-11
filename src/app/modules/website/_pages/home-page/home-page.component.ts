@@ -1,31 +1,34 @@
-import { Component } from '@angular/core';
-import {UserService} from '../../../../_services/users/user.service';
-import {UserModelForCreate} from '../../../../_models/user/user.model';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {RegisterComponent} from '../../_components/register/register.component';
+import {UserService} from '../../../../_services/users/user.service';
+import {UserModelForList} from '../../../../_models/user/user.model';
 
 @Component({
   selector: 'app-home-page',
   imports: [
-    FormsModule
+    FormsModule,
+    RegisterComponent,
+    NgIf,
+    AsyncPipe,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent {
-  user: UserModelForCreate = new UserModelForCreate();
+export class HomePageComponent implements OnInit{
+  registerMode:boolean = false;
+  users: UserModelForList[] = [];
+  constructor(public userService: UserService) {}
 
-  constructor(
-    private userService: UserService,
-  ) {}
+  ngOnInit() {
+    this.userService.getAllUsers();
+    this.userService.usersList$.subscribe(data => {
+      this.users = data;
+    })
+  }
 
-  registerUser() {
-    this.userService.registerUser(this.user).subscribe(
-      data => {
-        alert('User registered successfully!');
-      },
-      error => {
-        alert('Error registering user: ' + error);
-      }
-    );
+  registerToggle(){
+    this.registerMode = !this.registerMode;
   }
 }

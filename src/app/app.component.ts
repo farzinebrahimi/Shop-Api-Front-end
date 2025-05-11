@@ -19,14 +19,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadUser();
+
   }
 
-  loadUser() {
-    this.userService.getAllUsers().subscribe(data => {
-      this.users = data;
-    })
-  }
+
   trackById(index: number, item: any): number {
     return item.id;
   }
