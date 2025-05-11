@@ -2,6 +2,7 @@ import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {UserModelForCreate, UserModelForList} from '../../_models/user/user.model';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,10 @@ export class UserService {
   currentUser = signal<UserModelForCreate | null>(null);
 
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) {
   }
 
   getAllUsers() {
@@ -36,6 +40,7 @@ export class UserService {
     this.http.post<UserModelForCreate>(`${this.apiUrl}account/register`, newUser).subscribe(
       (response) => {
         this.registerStatusSubject.next('Registration successful');
+        this.router.navigateByUrl('members');
       },
       (error) => {
         this.registerStatusSubject.next('Registration failed');
@@ -49,6 +54,7 @@ export class UserService {
         if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUser.set(user);
+        this.router.navigateByUrl('members');
         }
       })
     )
@@ -57,5 +63,6 @@ export class UserService {
   logoutUser(){
     localStorage.removeItem('user');
     this.currentUser.set(null);
+    this.router.navigateByUrl('home');
   }
 }
