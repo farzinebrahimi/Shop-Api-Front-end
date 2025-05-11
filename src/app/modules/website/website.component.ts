@@ -6,7 +6,7 @@ import {HeaderComponent} from './_components/header/header.component';
   selector: 'app-website',
   imports: [
     RouterOutlet,
-    HeaderComponent
+    HeaderComponent,
   ],
   templateUrl: './website.component.html',
   styleUrl: './website.component.css'

@@ -22,7 +22,7 @@ export class HeaderComponent {
   loggedIn: boolean = false;
 
   constructor(
-    private userService: UserService,
+    public userService: UserService,
     private router: Router
   ) {
   }

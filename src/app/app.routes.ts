@@ -5,7 +5,7 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./modules/website/website.module').then((m) => m.WebsiteModule),
+      import('./modules/website/website.module').then ((m) => m.WebsiteModule),
   },
 ];
 @NgModule ({

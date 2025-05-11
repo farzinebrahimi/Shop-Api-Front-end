@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {UserModelForCreate, UserModelForList} from '../../_models/user/user.model';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toastr : ToastrService
     ) {
   }
 
@@ -41,9 +43,11 @@ export class UserService {
       (response) => {
         this.registerStatusSubject.next('Registration successful');
         this.router.navigateByUrl('members');
+        this.toastr.success('Registration successful');
       },
       (error) => {
         this.registerStatusSubject.next('Registration failed');
+        this.toastr.error(error.error);
       }
     );
   }
@@ -55,6 +59,7 @@ export class UserService {
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUser.set(user);
         this.router.navigateByUrl('members');
+        this.toastr.success('Login successful');
         }
       })
     )
