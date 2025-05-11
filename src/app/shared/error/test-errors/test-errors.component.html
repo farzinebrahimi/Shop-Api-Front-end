@@ -4,4 +4,10 @@
   <button class="bg-red-500 px-8 py-4 " (click)="get404Error()">Test 404 error</button>
   <button class="bg-red-500 px-8 py-4 " (click)="get500Error()">Test 500 error</button>
   <button class="bg-red-500 px-8 py-4 " (click)="get400ValidationError()">Test Validation error</button>
+
+  <div *ngIf="validationErrors$ | async as errors">
+    <div *ngFor="let error of errors">
+      {{error}}
+    </div>
+  </div>
 </div>

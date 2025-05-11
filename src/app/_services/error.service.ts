@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
-  baseUrl: string = "https;//localhost:5001/api/";
+  baseUrl: string = "https://localhost:5001/api/";
+  validationError:string[] = [];
+
+  validationErrorSubject = new BehaviorSubject<string[]>(this.validationError);
+   public validationError$: Observable<string[]> = this.validationErrorSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -36,7 +41,12 @@ export class ErrorService {
   get400ValidationError(){
     this.http.post(`${this.baseUrl}account/register`,{}).subscribe({
       next: response => console.log(response),
-      error: error => console.log(error)
+      error: error => {
+        console.log(error)
+       this.validationError = error;
+        console.log(this.validationError);
+        this.validationErrorSubject.next(this.validationError);
+      }
     })
   }
 
