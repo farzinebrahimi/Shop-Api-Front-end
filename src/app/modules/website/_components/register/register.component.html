@@ -12,16 +12,6 @@
       placeholder="Enter Phone Number"
       required>
   </div>
-  <div class="m-3 flex flex-col gap-y-3 font-mono">
-    <label>Who is your favorite user?</label>
-    <select class="p-4 bg-stone-600/20 rounded-2xl">
-      @for (user of userFromHomeComponent(); track $index) {
-        <option class="bg-stone-800 text-stone-300" value="{{user.phoneNumber}}">
-          {{ user.phoneNumber }}
-        </option>
-      }
-    </select>
-  </div>
   <div class="flex flex-col gap-y-3 font-mono">
     <label class="text-left text-3xl">Password</label>
     <input
@@ -33,7 +23,9 @@
       required>
   </div>
   <div class="flex justify-between items-center gap-x-5">
-    <button class="px-8 py-4 border rounded-2xl border-stone-800/50" type="submit">Register</button>
-    <button class="px-8 py-4 border rounded-2xl border-stone-800/50" (click)="cancel()" type="button">Cancel</button>
+    <button class="px-8 py-4 border rounded-2xl cursor-pointer border-stone-800/50" type="submit">Register</button>
+    <button class="px-8 py-4 border rounded-2xl cursor-pointer border-stone-800/50" (click)="cancel()" type="button">
+      Cancel
+    </button>
   </div>
 </form>

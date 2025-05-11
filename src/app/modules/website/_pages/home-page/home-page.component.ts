@@ -11,7 +11,6 @@ import {UserModelForList} from '../../../../_models/user/user.model';
     FormsModule,
     RegisterComponent,
     NgIf,
-    AsyncPipe,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
@@ -30,5 +29,9 @@ export class HomePageComponent implements OnInit{
 
   registerToggle(){
     this.registerMode = !this.registerMode;
+  }
+
+  cancelRegisterMode(event: boolean){
+    this.registerMode = event;
   }
 }

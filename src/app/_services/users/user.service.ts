@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import {UserModelForCreate, UserModelForList} from '../../_models/user/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl: string ="https://localhost:5001/api/"
+  apiUrl: string = "https://localhost:5001/api/"
 
   private usersList: UserModelForList[] = [];
   private usersListSubject = new BehaviorSubject<UserModelForList[]>(this.usersList);
@@ -17,19 +17,22 @@ export class UserService {
 
   public usersList$: Observable<UserModelForList[]> = this.usersListSubject.asObservable();
 
+  currentUser = signal<UserModelForCreate | null>(null);
 
-  constructor(private http : HttpClient) { }
 
-  getAllUsers(){
+  constructor(private http: HttpClient) {
+  }
+
+  getAllUsers() {
     this.http.get<any>(`${this.apiUrl}users`).subscribe(data => {
       data.forEach((d: any) => {
         this.usersList.push(d);
       })
-     this.usersListSubject.next(this.usersList)
+      this.usersListSubject.next(this.usersList)
     })
   }
 
-  registerUser(newUser: UserModelForCreate){
+  registerUser(newUser: UserModelForCreate) {
     this.http.post<UserModelForCreate>(`${this.apiUrl}account/register`, newUser).subscribe(
       (response) => {
         this.registerStatusSubject.next('Registration successful');
@@ -40,14 +43,19 @@ export class UserService {
     );
   }
 
-  loginUser(user: UserModelForCreate){
-    this.http.post<UserModelForCreate>(`${this.apiUrl}account/login`, user).subscribe(
-      (response) => {
-        this.registerStatusSubject.next('Login successful');
-      },
-      (error) => {
-        this.registerStatusSubject.next('Login failed');
-      }
-    );
+  loginUser(user: UserModelForCreate) {
+    this.http.post<UserModelForCreate>(`${this.apiUrl}account/login`, user).pipe(
+      map(user => {
+        if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUser.set(user);
+        }
+      })
+    )
+  }
+
+  logoutUser(){
+    localStorage.removeItem('user');
+    this.currentUser.set(null);
   }
 }

@@ -27,6 +27,7 @@ export class HeaderComponent {
   }
 
   logout(){
+    this.userService.logoutUser();
     this.loggedIn = false;
   }
 }
