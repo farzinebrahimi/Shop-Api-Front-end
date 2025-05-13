@@ -34,7 +34,7 @@
     </ng-container>
     <ng-template #loginTemplate>
       <form class="flex gap-x-5" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-        <input [(ngModel)]="user.phoneNumber"
+        <input [(ngModel)]="user.username"
                class="p-4 rounded-2xl border text-white border-stone-800/20 bg-stone-800/20"
                type="text"
                name="phoneNumber">

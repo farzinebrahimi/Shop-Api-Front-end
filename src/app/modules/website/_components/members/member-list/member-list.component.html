@@ -1,1 +1,9 @@
-<p>member-list works!</p>
+<div class="container mx-auto w-full">
+  <div class="flex  text-4xl items-center font-mono mt-32 w-full">
+    <div class="grid grid-cols-1 gap-5 bg-amber-200 p-10 rounded-2xl w-full">
+      <div *ngFor="let member of members">
+        <p>{{member.knownAs}}</p>
+      </div>
+    </div>
+  </div>
+</div>

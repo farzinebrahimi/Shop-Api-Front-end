@@ -1,15 +1,19 @@
-import {Injectable, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {User} from '../../_models/user/user.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl: string = "https://localhost:5001/api/"
+  apiUrl: string = environment.apiUrl
+  private http: HttpClient = inject(HttpClient);
+  private router: Router = inject(Router);
+  private toastr: ToastrService = inject(ToastrService);
 
   private usersList: User[] = [];
   private usersListSubject = new BehaviorSubject<User[]>(this.usersList);
@@ -22,12 +26,7 @@ export class UserService {
   currentUser = signal<User | null>(null);
 
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private toastr : ToastrService
-    ) {
-  }
+
 
   getAllUsers() {
     this.http.get<any>(`${this.apiUrl}users`).subscribe(data => {
@@ -52,21 +51,21 @@ export class UserService {
     );
   }
 
-  loginUser(user: User) {
+  loginUser(user: any) {
     this.http.post<User>(`${this.apiUrl}account/login`, user).pipe(
-        map((user) => {
-          if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-            this.currentUser.set(user);
-            this.router.navigateByUrl('members');
-            this.toastr.success('Login successful');
-          }
-        })
-      )
+      map((res: User) => {
+        const user: User = res;
+        if (user) {
+          this.currentUser.set(user);
+          this.router.navigateByUrl('members');
+          this.toastr.success('Login successful');
+        }
+      })
+    )
       .subscribe();
   }
 
-  logoutUser(){
+  logoutUser() {
     localStorage.removeItem('user');
     this.currentUser.set(null);
     this.router.navigateByUrl('home');
