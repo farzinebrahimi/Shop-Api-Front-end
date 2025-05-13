@@ -1,4 +1,4 @@
-import {Component, input, output} from '@angular/core';
+import {Component, output} from '@angular/core';
 import {UserService} from '../../../../_services/users/user.service';
 import {FormsModule} from '@angular/forms';
 

@@ -14,7 +14,7 @@
       </ul>
       <div d class="relative z-20 w-64" (click)="toggleDropdown()">
         <a  class="cursor-pointer text-stone-400 hover:text-white transition-all duration-300 ease-in-out">
-          Welcome {{ userService.currentUser()?.phoneNumber | titlecase}}
+          Welcome {{ userService.currentUser()?.username | titlecase}}
         </a>
         <!-- dropdown menu -->
         <div [ngClass]="isDropdownOpen ? 'scale-100' : 'scale-0'"

@@ -3,8 +3,8 @@ import {FormsModule} from '@angular/forms';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {RegisterComponent} from '../../_components/register/register.component';
 import {UserService} from '../../../../_services/users/user.service';
-import {UserModelForList} from '../../../../_models/user/user.model';
 import {TestErrorsComponent} from '../../../../shared/error/test-errors/test-errors.component';
+import {User} from '../../../../_models/user/user.model';
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit{
   userService: UserService = inject(UserService)
 
   registerMode:boolean = false;
-  users: UserModelForList[] = [];
+  users: User[] = [];
   constructor() {}
 
   ngOnInit() {

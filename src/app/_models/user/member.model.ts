@@ -1,0 +1,19 @@
+import {Photo} from '../photo/photo.model';
+
+export interface MemberModel {
+  id: number
+  userName: string
+  age: number
+  photoUrl: string
+  knownAs: string
+  created: Date
+  lastActive: Date
+  gender: string
+  introduction: any
+  interests: string
+  lookingFor: string
+  city: string
+  country: string
+  photos: Photo[]
+}
+
