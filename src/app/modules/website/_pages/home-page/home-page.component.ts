@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {RegisterComponent} from '../../_components/register/register.component';
@@ -18,9 +18,12 @@ import {TestErrorsComponent} from '../../../../shared/error/test-errors/test-err
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent implements OnInit{
+  /*-------Injection-------*/
+  userService: UserService = inject(UserService)
+
   registerMode:boolean = false;
   users: UserModelForList[] = [];
-  constructor(public userService: UserService) {}
+  constructor() {}
 
   ngOnInit() {
     this.userService.getAllUsers();
